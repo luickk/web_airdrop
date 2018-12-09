@@ -4,14 +4,13 @@ An extension for ros_airdrop that uses roslibjs for managing settings & missions
 
 ### Installation
 
-   > requires [ros_airdrop](https://github.com/mrGrimod/ros_airdrop) roscore running
-
 1. `cd /var/www/html` <br>
 
 2. `git clone https://github.com/MrGrimod/web_airdrop.git` <br>
 
 3. Go to http://address/web_airdrop/gps.html
 
+   > requires [ros_airdrop](https://github.com/mrGrimod/ros_airdrop) roscore running
 
 ### Channels.html:
 
