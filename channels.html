@@ -1,0 +1,259 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DJI Drone Web Interface</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="assets/scss/style.css">
+    <link href="assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+
+    <script type="text/javascript" src="assets/js/eventemitter2.min.js"></script>
+    <script type="text/javascript" src="assets/js/roslib.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+
+    <!-- Left Panel -->
+
+    <aside id="header" class="left-panel">
+
+    </aside><!-- /#left-panel -->
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <img id="con_status" style="margin: 10px; width: 30%; height: 30%;" src="assets/img/disconnected.svg">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">Channels</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 class="card-title mb-0">Channels</h4>
+                                <!---<div class="small text-muted">All</div>--->
+                            </div>
+
+
+                    </div><br>
+							<div class="row">
+
+								<div class="col-md-4">
+									<div class="card">
+										<div class="card-header">Channel E</div>
+										<div class="card-body">
+										<div class="form-group">
+										<label>Forward</label>
+										<input id="for_val" style="width: 50%;" type="text" class="form-control">
+										</div>
+										<div class="form-group">
+										<label>Back</label>
+										<input id="back_val" style="width: 50%;" type="text" class="form-control">
+										</div>
+										<div class="btn-group btn-group-toggle" data-toggle="buttons">
+										<label onclick="manual_action('fly_back', parseInt($('#for_val').val()))" class="btn btn-secondary active">
+										  <input type="radio" name="options" id="option1"> SetF
+										</label>
+										<label onclick="manual_action('fly_forward', parseInt($('#back_val').val()))" class="btn btn-secondary">
+										  <input type="radio" name="options" id="option2"> SetB
+										</label>
+										</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="card">
+									<div class="card-header">Channel A</div>
+									<div class="card-body">
+									  <div class="form-group">
+										<label>Left</label>
+										<input id="left_val" style="width: 50%;" type="text" class="form-control">
+									  </div>
+									  <div class="form-group">
+										<label>Right</label>
+										<input id="right_val" style="width: 50%;" type="text" class="form-control">
+									  </div>
+									  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+										<label onclick="manual_action('fly_left', parseInt($('#left_val').val()))" class="btn btn-secondary active">
+										  <input type="radio" name="options" id="option1"> SetL
+										</label>
+										<label onclick="manual_action('fly_right', parseInt($('#right_val').val()))" class="btn btn-secondary">
+										  <input type="radio" name="options" id="option2"> SetR
+										</label>
+									  </div>
+
+									</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="card">
+										<div class="card-header">Channel R</div>
+										<div class="card-body">
+										  <div class="form-group">
+											<label>Turn Left</label>
+											<input id="tleft_val" style="width: 50%;" type="text" class="form-control">
+										  </div>
+										  <div class="form-group">
+											<label>Turn Right</label>
+											<input id="tright_val" style="width: 50%;" type="text" class="form-control">
+										  </div>
+										  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+											<label onclick="manual_action('turn_left', parseInt($('#tleft_val').val()))" class="btn btn-secondary active">
+											  <input type="radio" name="options" id="option1"> SetTl
+											</label>
+											<label onclick="manual_action('turn_right', parseInt($('#tright_val').val()))" class="btn btn-secondary">
+											  <input type="radio" name="options" id="option2"> SeTr
+											</label>
+										  </div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="card">
+										<div class="card-header">Channel T</div>
+										<div class="card-body">
+										  <div class="form-group">
+											<label>Throttle</label>
+											<input id="thr_val" style="width: 50%;" type="text" class="form-control">
+										  </div>
+										  <button onclick="manual_action('fly_throttle', parseInt($('#thr_val').val()))" type="button" class="btn btn-outline-primary">Set</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="card">
+										<div class="card-header">Channel U</div>
+										<div class="card-body">
+
+										  <button onclick="manual_action('set_fm', 0)" style="width: 100%;" type="button" class="btn btn-success">GPS.Atti</button> <br><br>
+										  <button onclick="manual_action('set_fm', 2)" style="width: 100%;" type="button" class="btn btn-secondary">Atti</button> <br><br>
+										  <button onclick="manual_action('set_fm', 1)" style="width: 100%;" type="button" class="btn btn-danger">Failsafe</button> <br><br>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="card">
+									<div class="card-header">Template Pos</div>
+									<div class="card-body">
+
+									  <button onclick="manual_action('arm_motors', 5)" style="width: 100%;" type="button" class="btn btn-danger">ARM</button> <br><br>
+									  <button onclick="manual_action('set_neutral', 5)" style="width: 100%;" type="button" class="btn btn-secondary">NEUTRAL</button> <br><br>
+									  <button onclick="manual_action('throttle', 0)" style="width: 100%;" type="button" class="btn btn-secondary">0 THROTTLE</button> <br><br>
+
+									</div>
+									</div>
+								</div>
+						</div>
+                </div>
+            </div>
+
+
+        </div>
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/lib/chart-js/Chart.bundle.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/widgets.js"></script>
+    <script src="assets/js/lib/vector-map/jquery.vmap.js"></script>
+    <script src="assets/js/lib/vector-map/jquery.vmap.min.js"></script>
+    <script src="assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
+    <script src="assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
+
+    <script type="text/javascript">
+    // Connecting to ROS
+    // -----------------
+
+    var ros = new ROSLIB.Ros({
+      url : 'ws://192.168.2.1:9090'
+    });
+
+    ros.on('connection', function() {
+      console.log('Connected to websocket server.');
+      $('#con_status').attr('src','assets/img/connected.svg');
+    });
+
+    ros.on('error', function(error) {
+      console.log('Error connecting to websocket server: ', error);
+      $('#con_status').attr('src','assets/img/disconnected.svg');
+    });
+
+    ros.on('close', function() {
+      console.log('Connection to websocket server closed.');
+      $('#con_status').attr('src','assets/img/disconnected.svg');
+    });
+
+    function manual_action(action_type, action_val){
+      var service_client = new ROSLIB.Service({
+        ros : ros,
+        name : '/manual_action',
+        serviceType : 'cc_node/manual_action'
+      });
+
+      var request = new ROSLIB.ServiceRequest({
+        m_action_type: action_type,
+        m_action_val: action_val
+      });
+
+      service_client.callService(request, function(result) {
+        console.log(result.m_action_status);
+      });
+    }
+
+    $(document).ready( function () {
+    	$("#header").load("sidebar.html");
+    });
+    </script>
+</body>
+</html>
