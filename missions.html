@@ -19,17 +19,15 @@
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/flag-icon.min.css">
     <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/terminal.css">
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
     <link rel="stylesheet" href="assets/scss/style.css">
-    <link href="assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
 
     <script type="text/javascript" src="assets/js/eventemitter2.min.js"></script>
     <script type="text/javascript" src="assets/js/roslib.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
-
 </head>
 <body>
 
@@ -60,6 +58,7 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
+                            <li class="active">Mission managing Interface</li>
                         </ol>
                     </div>
                 </div>
@@ -69,14 +68,15 @@
         <div class="content">
         <div class="row">
           <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="title">Console</h5>
+            <div class="card ">
+              <div class="card-header ">
+                Available missions
               </div>
-              <div class="card-body">
-                <div id="container">
-                        <div class="prompt" style="max-height:400px; white-space: pre-line;  overflow: scroll;"></div><div><input class="cmdline" autofocus /></div>
-                      </div>
+              <div class="card-body ">
+                <br>
+                <ul id="mission_list" class="list-group">
+
+                </ul>
               </div>
             </div>
           </div>
@@ -91,14 +91,14 @@
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/main.js"></script>
 
-    <script src="assets/js/lib/chart-js/Chart.bundle.js"></script>
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/widgets.js"></script>
     <script src="assets/js/lib/vector-map/jquery.vmap.js"></script>
     <script src="assets/js/lib/vector-map/jquery.vmap.min.js"></script>
     <script src="assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
     <script src="assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
-	  <script type="text/javascript">
+
+  <script type="text/javascript" type="text/javascript">
     // Connecting to ROS
     // -----------------
 
@@ -120,47 +120,52 @@
       console.log('Connection to websocket server closed.');
       $('#con_status').attr('src','assets/img/disconnected.svg');
     });
-    function splitString (string, size) {
-    	var re = new RegExp('.{1,' + size + '}', 'g');
-    	return string.match(re);
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
-    // Subscribing to rosout
-    // ----------------------
-
-    var listener = new ROSLIB.Topic({
-      ros : ros,
-      name : '/rosout',
-      messageType : 'rosgraph_msgs/Log'
-    });
-    var msg;
-    listener.subscribe(function(data) {
-      $('.prompt').append('ROSOUT > ' + data.msg + '<br>');
-    });
-
-//
-    var listener1 = new ROSLIB.Topic({
-      ros : ros,
-      name : '/rosout_agg',
-      messageType : 'rosgraph_msgs/Log'
-    });
-    var msg;
-    listener1.subscribe(function(data) {
-      $('.prompt').append('ROSOUT_AGG > ' + data.msg + '<br>');
-    });
-//
-    var listener2 = new ROSLIB.Topic({
-      ros : ros,
-      name : '/diagnostics_agg',
-      messageType : 'diagnostic_msgs/DiagnosticArray'
-    });
-    var msg;
-    listener2.subscribe(function(data) {
-      $('.prompt').append('DIAGNOSTICS_AGG > ' + data.msg + '<br>');
-    });
-    
+    async function sync(){
+      do {
+      await sleep(1000);
+      sync_missions();
+      } while (1){}
+    }
     $(document).ready( function () {
       $("#header").load("sidebar.html");
+      sync();
     });
-	</script>
+    function sync_missions(){
+      var service_client = new ROSLIB.Service({
+        ros : ros,
+        name : '/list_missions',
+        serviceType : 'mn_node/list_missions'
+      });
+
+      var request = new ROSLIB.ServiceRequest({
+      });
+
+      service_client.callService(request, function(result) {
+        $("#mission_list").empty();
+        for(var mission in result.mission_list){
+          $("#mission_list").append('<li style="cursor: pointer;" onclick="start_missions('+"'"+result.mission_list[mission]+"'"+')" class="list-group-item">'+result.mission_list[mission].split('.')[0].trim()+'</li>');
+        }
+      });
+    }
+    function start_missions(mission){
+      var service_client = new ROSLIB.Service({
+        ros : ros,
+        name : '/start_mission',
+        serviceType : 'mn_node/start_mission'
+      });
+
+      var request = new ROSLIB.ServiceRequest({
+        mission_name: mission
+      });
+
+      service_client.callService(request, function(result) {
+        console.log(result.mission_status);
+      });
+    }
+  </script>
 </body>
 </html>
