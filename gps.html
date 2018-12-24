@@ -24,7 +24,6 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-
     <script type="text/javascript" src="assets/js/eventemitter2.min.js"></script>
     <script type="text/javascript" src="assets/js/roslib.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
@@ -234,13 +233,12 @@
     }
 
     function calc_distance() {
-      var lat = $('#disp_s_latlon').text().split[0];
-      var lon = $('#disp_s_latlon').text().split[1];
-      var lat1 = $('#disp_latlon').text().split[0];
-      var lon1 = $('#disp_latlon').text().split[1];
-
+      var lat = $('#disp_s_latlon').text().split(',')[0];
+      var lon = $('#disp_s_latlon').text().split(',')[1];
+      var lat1 = $('#disp_latlon').text().split(',')[0];
+      var lon1 = $('#disp_latlon').text().split(',')[1];
       var dist = getDistanceFromLatLonInKm(lat,lon,lat1,lon1);
-      if($('#disp_gps_sats').text()<8){
+      if($('#disp_sats').text()<8){
       $("#dist").text("Not enough Satellites!");
       } else {
       $("#dist").text(dist.toFixed(3));
