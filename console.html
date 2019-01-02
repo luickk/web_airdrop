@@ -138,15 +138,15 @@
     });
 
 //
-    var listener1 = new ROSLIB.Topic({
-      ros : ros,
-      name : '/rosout_agg',
-      messageType : 'rosgraph_msgs/Log'
-    });
-    var msg;
-    listener1.subscribe(function(data) {
-      $('.prompt').append('ROSOUT_AGG > ' + data.msg + '<br>');
-    });
+    // var listener1 = new ROSLIB.Topic({
+    //   ros : ros,
+    //   name : '/rosout_agg',
+    //   messageType : 'rosgraph_msgs/Log'
+    // });
+    // var msg;
+    // listener1.subscribe(function(data) {
+    //   $('.prompt').append('ROSOUT_AGG > ' + data.msg + '<br>');
+    // });
 //
     var listener2 = new ROSLIB.Topic({
       ros : ros,
@@ -157,7 +157,7 @@
     listener2.subscribe(function(data) {
       $('.prompt').append('DIAGNOSTICS_AGG > ' + data.msg + '<br>');
     });
-    
+
     $(document).ready( function () {
       $("#header").load("sidebar.html");
     });
