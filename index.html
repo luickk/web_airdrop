@@ -19,10 +19,13 @@
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/flag-icon.min.css">
     <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="assets/css/terminal.css">
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
     <link rel="stylesheet" href="assets/scss/style.css">
+    <link href="assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
 
     <script type="text/javascript" src="assets/js/eventemitter2.min.js"></script>
     <script type="text/javascript" src="assets/js/roslib.min.js"></script>
@@ -57,7 +60,7 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li class="active">GPS Information & Processing</li>
+                            <li class="active">Dashboar</li>
                         </ol>
                     </div>
                 </div>
@@ -65,53 +68,66 @@
         </div>
 
         <div class="content">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header ">
-                Stats
-              </div>
-              <div class="card-body ">
-                <ul class="list-group">
-                  <li class="list-group-item active">Distance from Takeoff Pos:  <span class="badge badge-light" id="dist"></span></li>
-                  <li class="list-group-item">Latest Refresh: <span id="latestrefreshdist"></span></li>
-                </ul>
-              </div>
-            </div>
-            <div class="card ">
-              <div class="card-header ">
-                Serial GPS Data
-              </div>
-              <div id="savedTakeOffPos" class="card-body ">
-                <br>
-                <ul class="list-group">
-                  <li class="list-group-item active">Number of satellites:  <span class="badge badge-light" id="disp_sats"></span></li>
-                  <li class="list-group-item">Altitude: <span id="disp_alt"></span></li>
-                  <li class="list-group-item">Heading:  <span id="disp_heading"></span></li>
-                  <li class="list-group-item">Lat, Lon: <span id="disp_latlon"></span></li>
-                  <li class="list-group-item">Latest Refresh: <span id="disp_latestrefresh"></span></li>
-                </ul> <br>
-              <button id="set_takeoff" type="button" class="btn btn-danger">Use as Takeoff Position</button>
-              </div>
-            </div>
-            <div class="card ">
-              <div class="card-header ">
-                Saved Takeoff position
-              </div>
-              <div class="card-body ">
-                <br>
-                <ul class="list-group">
-                  <li class="list-group-item active">Number of satellites when saved:  <span class="badge badge-light" id="disp_gpssats"></span></li>
-                  <li class="list-group-item">Altitude when saved: <span id="disp_s_alt"></span></li>
-                  <li class="list-group-item">Heading when saved:  <span id="disp_s_heading"></span></li>
-                  <li class="list-group-item">Lat, Lon when saved: <span id="disp_s_latlon"></span></li>
-                  <li class="list-group-item">Latest Refresh when saved: <span id="disp_s_latestrefresh"></span></li>
-                </ul>
-              </div>
-            </div>
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-4">
+                        <h4 class="card-title mb-0">Dashboard</h4>
+                    </div>
+                  </div><br>
+    							<div class="row">
+
+    								<div class="col-md-4">
+    									<div class="card">
+    										<div class="card-header">Console</div>
+      										<div class="card-body">
+                            <div class="prompt" style="max-height:400px; white-space: pre-line; overflow: scroll; height: 300px;"></div><div><input class="cmdline" autofocus /></div>
+      										</div>
+    									</div>
+    								</div>
+    								<div class="col-md-4">
+    									<div class="card">
+      									<div class="card-header">GPS</div>
+        									<div class="card-body">
+                          <ul class="list-group">
+                            <li class="list-group-item active">Number of satellites:  <span class="badge badge-light" id="disp_sats"></span></li>
+                            <li class="list-group-item">Distance from Takeoff Pos:  <span class="badge badge-light" id="dist"></span></li>
+                            <li class="list-group-item">Latest Refresh: <span id="latestrefreshdist"></span></li>
+                            <li class="list-group-item">Altitude: <span id="disp_alt"></span></li>
+                            <li class="list-group-item">Heading:  <span id="disp_heading"></span></li>
+                            <li class="list-group-item">Lat, Lon: <span id="disp_latlon"></span></li>
+                            <li class="list-group-item">Latest Refresh: <span id="disp_latestrefresh"></span></li>
+                          </ul> <br>
+                        <button id="set_takeoff" type="button" class="btn btn-danger">Use as Takeoff Position</button>
+
+        								</div>
+    									</div>
+                    </div>
+    								<div class="col-md-4">
+    									<div class="card">
+    										<div class="card-header">Mission</div>
+    										<div class="card-body">
+                          <ul id="mission_list" class="list-group"></ul>
+                          <br>
+                            <p>Status: <span id="status"></span></p>
+                          <hr>
+                            <p>Last mission function status: <span id="mission_status"></span></p>
+                          <hr>
+                            <p>Last operation function status: <span id="operation_status"></span></p>
+                          <hr>
+                            <p>Last action function status: <span id="action_status"></span></p>
+                          <hr>
+    										</div>
+    									</div>
+    								</div>
+    						</div>
           </div>
         </div>
-      </div>
+
+
+        </div>
+    </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
 
@@ -121,18 +137,17 @@
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/main.js"></script>
 
+    <script src="assets/js/lib/chart-js/Chart.bundle.js"></script>
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/widgets.js"></script>
     <script src="assets/js/lib/vector-map/jquery.vmap.js"></script>
     <script src="assets/js/lib/vector-map/jquery.vmap.min.js"></script>
     <script src="assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
     <script src="assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
+    <script src="js-dash/channels.js"></script>
+    <script src="js-dash/console.js"></script>
     <script src="js-dash/gps.js"></script>
-    <script type="text/javascript">
-      $(document).ready( function () {
-        $("#header").load("sidebar.html");
-        sync();
-      });
-    </script>
+    <script src="js-dash/missions.js"></script>
+    <script src="js-dash/tools.js"></script>
 </body>
 </html>
