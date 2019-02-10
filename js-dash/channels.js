@@ -11,7 +11,23 @@ function manual_action(action_type, action_val){
   });
 
   service_client.callService(request, function(result) {
-    console.log(result.m_action_status);
+  });
+}
+
+function conf_states(airborne_, in_mission_, landing_phase_){
+  var service_client = new ROSLIB.Service({
+    ros : ros,
+    name : '/conf_states',
+    serviceType : 'cc_node/conf_states'
+  });
+
+  var request = new ROSLIB.ServiceRequest({
+    airborne: airborne_,
+    in_mission: in_mission_,
+    landing_phase: landing_phase_
+  });
+
+  service_client.callService(request, function(result) {
   });
 }
 
