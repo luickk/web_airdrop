@@ -133,6 +133,33 @@
     										</div>
     									</div>
     								</div>
+                    <div class="col-md-4">
+                      <div class="card">
+                        <div class="card-header">Channels</div>
+                        <div class="card-body">
+
+                          <button onclick="manual_action('set_fm', 0)" style="width: 100%;" type="button" class="btn btn-success">GPS.Atti</button> <br><br>
+                          <button onclick="manual_action('set_fm', 2)" style="width: 100%;" type="button" class="btn btn-secondary">Atti</button> <br><br>
+                          <button onclick="manual_action('set_fm', 1)" style="width: 100%;" type="button" class="btn btn-danger">Failsafe</button> <br><br>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="card">
+                      <div class="card-header">Templates</div>
+                      <div class="card-body">
+
+                        <button onclick="manual_action('arm_motors', 5)" style="width: 100%;" type="button" class="btn btn-danger">ARM</button> <br><br>
+                        <button onclick="manual_action('set_neutral', 5)" style="width: 100%;" type="button" class="btn btn-secondary">NEUTRAL</button> <br><br>
+                        <button onclick="manual_action('throttle', 0)" style="width: 100%;" type="button" class="btn btn-secondary">0 THROTTLE</button> <br><br>
+
+                        <button onclick="conf_states(true, false, false)" style="width: 100%;" type="button" class="btn btn-secondary">Conf Statet - Airborne</button> <br><br>
+                        <button onclick="conf_states(false, false, false)" style="width: 100%;" type="button" class="btn btn-danger">Conf Statet - Reset</button> <br><br>
+
+                      </div>
+                      </div>
+                    </div>
     						</div>
           </div>
         </div>
