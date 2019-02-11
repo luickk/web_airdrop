@@ -1,6 +1,6 @@
 # Web Airdrop
 
-An extension for ros_airdrop that uses roslibjs for managing settings & missions.
+An extension for [ros_airdrop](https://github.com/MrGrimod/ros_airdrop) that uses [roslibjs](http://wiki.ros.org/roslibjs), to communicate with the RosCore running on the drone. Via the Web Interface you can manage or monitor settings, flight states and start missions.
 
 ### Installation
 
@@ -8,13 +8,28 @@ An extension for ros_airdrop that uses roslibjs for managing settings & missions
 
 2. `git clone https://github.com/MrGrimod/web_airdrop.git` <br>
 
-3. Go to http://address/web_airdrop/gps.html
+3. Go to http://address/web_airdrop/
 
    > requires [ros_airdrop](https://github.com/mrGrimod/ros_airdrop) roscore running
 
+
+### index.html:
+
+Serves as dashboard to monitor all important flight states/variables and to start/monitor ongoing missions.
+
+
 ### Channels.html:
 
-Managing single channels of the DJI-Naza manually
+Managing single channels of the DJI-Naza manually, but also offers the possibility to manipulate flight states from the CC Node.
+
+### Missions.html:
+
+Displaying all available missions, as well as there progress/states.
+Also offers the option to start/abort missions.
+
+### States.html:
+
+Displaying all core states managed by the CC Node.
 
 ### Config.php:
 
@@ -22,7 +37,7 @@ Managing the config file (/etc/naza/pwm_config.txt) of [dji_naza_interface_c-](h
 
 ### GPS.html:
 
-Subscribes to gps_node which publishes GPS data to display the data show the distance from the start-up position or set the start-up location.
+Subscribes to gps_node which publishes GPS data, to display the data or set the start-up location manually.
 
 ### Tools.html:
 
