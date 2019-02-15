@@ -14,6 +14,20 @@ function manual_action(action_type, action_val){
   });
 }
 
+function hover(){
+  var service_client = new ROSLIB.Service({
+    ros : ros,
+    name : '/a_operation_stop_action_and_hover',
+    serviceType : 'cc_node/a_operation_stop_action_and_hover'
+  });
+
+  var request = new ROSLIB.ServiceRequest({
+    a_operation_pausing_reason: "web-dashboard"
+  });
+
+  service_client.callService(request, function(result) {
+  });
+}
 function conf_states(airborne_, in_mission_, landing_phase_){
   var service_client = new ROSLIB.Service({
     ros : ros,
