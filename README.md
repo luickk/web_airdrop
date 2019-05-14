@@ -12,6 +12,9 @@ An extension for [ros_airdrop](https://github.com/MrGrimod/ros_airdrop) that use
 
    > requires [ros_airdrop](https://github.com/mrGrimod/ros_airdrop) roscore running
 
+### Video
+
+<Yt Video>
 
 ### index.html:
 
