@@ -14,7 +14,7 @@ An extension for [ros_airdrop](https://github.com/MrGrimod/ros_airdrop) that use
 
 ### Video
 
-<Yt Video>
+https://www.youtube.com/watch?v=QzOBck26Hko
 
 ### index.html:
 
