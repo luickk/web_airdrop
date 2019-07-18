@@ -11,6 +11,7 @@ $(document).ready( function () {
   $("#header").load("sidebar.html");
   sync();
 });
+
 function sync_missions(){
   var service_client = new ROSLIB.Service({
     ros : ros,

@@ -71,7 +71,7 @@
 
             <div class="card">
               <div class="card-header ">
-                Stats
+                Mission Creation
               </div>
               <div class="card-body ">
                 <form>
@@ -95,6 +95,21 @@
                     <li class="list-group-item"> <span class="badge badge-warning">land </span> sets the FC to rescure & return to home mode, needs to be last command on mission</li>
                   </ul>
                 </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header ">
+                Mission Overview
+              </div>
+              <div class="card-body ">
+                <br>
+                <div class="card">
+                  <ul id="overview" class="list-group list-group-flush">
+
+                  </ul>
+                </div>
+                <button id="sync_overview" class="btn btn-primary">Force Sync </button>
               </div>
             </div>
           </div>
@@ -122,6 +137,15 @@
         $("#header").load("sidebar.html");
         sync();
       });
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      async function sync(){
+        do {
+        await sleep(1000);
+          sync_m_overview();
+        } while (1){}
+      }
       $("#sbm").click(function(e){
           e.preventDefault();
           jQuery.ajax({
@@ -138,6 +162,17 @@
           });
           return false;
       });
+
+      function sync_m_overview(){
+        jQuery.ajax({
+          type: "GET",
+          url: "assets/php/view_mission.php",
+          dataType: "html",
+          success: function (result) {
+              $("#overview").html(result);
+          }
+        });
+      }
     </script>
 </body>
 </html>

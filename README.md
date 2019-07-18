@@ -12,6 +12,10 @@ An extension for [ros_airdrop](https://github.com/MrGrimod/ros_airdrop) that use
 
    > requires [ros_airdrop](https://github.com/mrGrimod/ros_airdrop) roscore running
 
+4. Add www-data mission to /etc missions folder: <br>
+  `sudo chown -R www-data /etc/airdrop/missions/`
+
+
 ### Video
 
 https://www.youtube.com/watch?v=QzOBck26Hko
